@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reax - 用户主页</title>
+<style>
+*{margin: 0;padding: 0;box-sizing: border-box;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;}
+html,body{width:100%;min-height:100vh;background:#fff}
+body{display:flex;justify-content:center;align-items:center;padding:20px;position:relative}
+.bg{position:fixed;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(0,0,0,0.03)1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.03)1px,transparent 1px);background-size:50px 50px;pointer-events:none;z-index:0}
+.c{width:100%;max-width:380px;position:relative;z-index:1;min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.i{width:16px;height:16px;display:inline-block;vertical-align:middle;flex-shrink:0;filter:brightness(0)saturate(100%)}
+.is{width:14px;height:14px;display:inline-block;vertical-align:middle;flex-shrink:0;filter:brightness(0)saturate(100%)}
+.ig{filter:brightness(0)saturate(0%)opacity(0.6);width:16px;height:16px}
+.sp{animation:spn 1.5s linear infinite;display:inline-block}
+@keyframes spn{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.hi{display:none !important}
+.gt{color:#999 !important;font-weight:400 !important}
+.ls2{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;text-align:center;color:#aaa;font-size:14px;width:100%;gap:12px}
+.ls2 .i{width:32px;height:32px;filter:brightness(0)saturate(0%)opacity:0.4}
+.pc{width:100%}
+.as{text-align:center;margin-bottom:20px}
+#ac{display:inline-block;width:80px;height:80px;border-radius:50%;border:3px solid #0a0a0a;overflow:hidden;background:transparent;position:relative;transition:border-color .3s ease;flex-shrink:0}
+#ac img{width:100%;height:100%;object-fit:cover;display:block}
+#ac.qa{background-size:cover;background-repeat:no-repeat;background-position:center}
+#ac.qa img{display:none}
+.ti{font-size:18px;font-weight:600;margin-bottom:20px;text-align:center;color:#0a0a0a;display:flex;align-items:center;justify-content:center;gap:8px}
+.ib{background:#f8f8f8;border-radius:10px;padding:18px 20px;margin-bottom:16px}
+.ib p{margin:8px 0;font-size:15px;color:#333;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.ib p .i{opacity:.6;flex-shrink:0}
+.ib span{color:#0a0a0a;font-weight:600}
+.sb{background:#f8f8f8;border-radius:10px;padding:12px 20px;margin-bottom:16px;display:flex;justify-content:space-between;width:100%}
+.sb .si{text-align:center;flex:1}
+.sb .si .nu{font-size:14px;font-weight:700;color:#0a0a0a}
+.sb .si .lb{font-size:14px;color:#0a0a0a;font-weight:600;margin-top:2px;display:flex;align-items:center;justify-content:center;gap:4px}
+.bb2,.eb{background:#0a0a0a;color:#fff;border:none;cursor:pointer;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.bb2{width:100%;padding:14px;border-radius:10px;font-size:15px;font-weight:700}
+.bb2 .i{filter:brightness(0)invert(1)}
+.eb{padding:6px 20px;border-radius:8px;font-size:14px}
+.eb .i{filter:brightness(0)invert(1)}
+.bb2:hover,.bb2:active,.eb:hover,.eb:active{background:#0a0a0a}
+#errorContainer {display: flex;flex-direction: column;align-items: center;justify-content: center;padding: 30px 20px;text-align: center;width: 100%;min-height: 200px;gap: 14px;}
+.ei {width: 50px;height: 50px;filter: brightness(0) saturate(100%);}
+.et {font-size: 18px;font-weight: 700;color: #333;}
+.scard{background:#fff;border-radius:16px;padding:30px 24px;width:100%;max-width:340px;margin:0 auto;box-shadow:0 8px 40px rgba(0,0,0,0.2)}
+.scard .sh{margin-bottom:16px}
+.scard .sh h3{font-size:18px;font-weight:600;color:#0a0a0a;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.scard .sh .ss{font-size:13px;color:#888}
+.scard .sr2{display:flex;gap:8px;align-items:center}
+.scard .sr2 .ib2{flex:1;position:relative}
+.scard .sr2 .ib2 input{width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:15px;outline:none;font-family:inherit;background:#fff;height:44px}
+.scard .sr2 .ib2 input:focus{border-color:#0a0a0a}
+.scard .sr2 .bs3{flex-shrink:0;width:44px;height:44px;background:#0a0a0a;border:none;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.scard .sr2 .bs3 img{width:20px;height:20px;filter:brightness(0)invert(1)}
+.scard .sr2 .bs3:hover,.scard .sr2 .bs3:active{background:#0a0a0a}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="c">
+<div id="loadingIndicator" class="ls2"><img src="/svg/loading.svg" class="i sp"><span>加载中...</span></div>
+<div id="normalContent" class="hi pc">
+<div class="as"><div id="ac"></div></div>
+<div class="ti" id="pageTitle"><img src="/svg/user.svg" class="i"> 用户资料</div>
+<div class="sb"><div class="si"><div class="nu" id="rankDisplay">--</div><div class="lb"><img src="/svg/ranking.svg" class="is">排名</div></div><div class="si"><div class="nu" id="pointsDisplay">0</div><div class="lb"><img src="/svg/coins.svg" class="is">积分</div></div></div>
+<div class="ib">
+<p><img src="/svg/user.svg" class="i">账号：<span id="profileUsername">––</span></p>
+<p><img src="/svg/sign.svg" class="i">签名：<span id="userSignature">––</span></p>
+<p><img src="/svg/gender.svg" class="i">性别：<span id="userGender">––</span></p>
+<p><img src="/svg/email.svg" class="i">邮箱：<span id="profileEmail">––</span></p>
+<p><img src="/svg/time.svg" class="i">注册时间：<span id="profileCreatedAt">––</span></p>
+<p><img src="/svg/qq.svg" class="ig">绑定QQ：<span id="profileQQ">--</span></p>
+</div>
+<button class="bb2" id="backBtn"><img src="/svg/return.svg" class="i"> 返回聊天</button>
+</div>
+<div id="errorContainer" class="hi"><img src="/svg/data.svg" class="ei"><h1 class="et">用户不存在</h1><button class="eb" id="errorBackBtn"><img src="/svg/return.svg" class="i"> 返回聊天</button></div>
+<div id="searchContainer" class="hi" style="width:100%;">
+<div class="scard">
+<div class="sh">
+<h3><img src="/svg/net.svg" class="i" style="width:20px;height:20px;"> 搜索用户</h3>
+<div class="ss">请输入用户名进行搜索</div>
+</div>
+<div class="sr2">
+<div class="ib2">
+<input type="text" id="searchUsername" placeholder="账号" autofocus>
+</div>
+<button class="bs3" id="searchBtn">
+<img src="/svg/search.svg">
+</button>
+</div>
+</div>
+</div>
+</div>
+<script src="/api/toast.js"></script>
+<script>
+!function(){
+var $=id=>document.getElementById(id);
+var L=$('loadingIndicator'),N=$('normalContent'),E=$('errorContainer'),S=$('searchContainer');
+var U=$('profileUsername'),M=$('profileEmail'),G=$('userSignature'),X=$('userGender'),T=$('profileCreatedAt'),Q=$('profileQQ');
+var A=$('ac'),R=$('rankDisplay'),P=$('pointsDisplay');
+var B=$('backBtn'),F=$('errorBackBtn'),H=$('pageTitle');
+var Ipt=$('searchUsername'),Btn=$('searchBtn');
+var api=async(u,m,b)=>{try{var o={method:m||'GET',headers:{'Content-Type':'application/json'},credentials:'include'};if(b)o.body=JSON.stringify(b);var r=await fetch(u,o);return await r.json()}catch(_){return{success:!1,error:'网络连接失败'}}};
+function gc(g){if(g==='男')return '#1677ff';if(g==='女')return '#ff69b4';if(g==='其他')return '#ffc107';return '#888'}
+function ua(q,g){var c=gc(g);A.style.borderColor=c;A.classList.remove('da','qa');A.style.backgroundImage='';A.style.backgroundColor='';A.innerHTML='';if(q){A.classList.add('qa');A.style.backgroundImage='url(https://q1.qlogo.cn/g?b=qq&nk='+q+'&s=640)';A.style.backgroundSize='cover';A.innerHTML='<img src="/svg/avatar.svg" style="display:none;">'}else{A.classList.add('da');A.innerHTML='<img src="/svg/avatar.svg">'}}
+function se(){L.classList.add('hi');N.classList.add('hi');E.classList.remove('hi');S.classList.add('hi')}
+function sc(d){L.classList.add('hi');E.classList.add('hi');S.classList.add('hi');N.classList.remove('hi');U.textContent=d.username;M.textContent=d.email;var p=d.total_points||0;P.textContent=p;R.textContent=(p>0&&d.rank)?'#'+d.rank:'未上榜';var s=d.signature||'未填写';G.textContent=s;G.classList.toggle('gt',s==='未填写');var g=d.gender||'不愿透露';X.textContent=g;X.classList.toggle('gt',g==='不愿透露');T.textContent=d.created_at||'未知';var q=d.qq_number||'未绑定';Q.textContent=q;Q.classList.toggle('gt',q==='未绑定');H.innerHTML='<img src="/svg/user.svg" class="i"> '+d.username+' 的主页';ua(d.qq_number,g);toast.success('账号信息加载成功')}
+function sh(){L.classList.add('hi');N.classList.add('hi');E.classList.add('hi');S.classList.remove('hi');document.title='Reax - 用户搜索';Ipt.focus()}
+async function lp(){var p=new URLSearchParams(window.location.search),u=p.get('id');if(!u){sh();return}L.classList.remove('hi');N.classList.add('hi');E.classList.add('hi');S.classList.add('hi');var r=await api('/api/user?username='+encodeURIComponent(u),'GET');if(!r.success||r.error==='用户不存在'){se();return}sc(r)}
+Btn.addEventListener('click',function(){var v=Ipt.value.trim();if(!v){toast.error('请输入用户名');return}window.location.href='/user?id='+encodeURIComponent(v)});
+Ipt.addEventListener('keydown',function(e){if(e.key==='Enter')Btn.click()});
+B.addEventListener('click',()=>{window.location.href='/'});
+F.addEventListener('click',()=>{window.location.href='/'});
+lp();
+}();
+</script>
+</body>
+</html>

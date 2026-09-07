@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reax - 账号设置</title>
+
+<style>
+*{margin: 0;padding: 0;box-sizing: border-box;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;}
+body{background:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;position:relative}
+.bg{position:fixed;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(0,0,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.03) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;z-index:0}
+.c{width:100%;max-width:380px;position:relative;z-index:1}
+.i,.is,.im,.ig{display:inline-block;vertical-align:middle;flex-shrink:0;width:16px;height:16px;filter:brightness(0)saturate(100%)}
+.is{width:14px;height:14px}
+.im{width:18px;height:18px}
+.ig{filter:brightness(0)saturate(0%)opacity:0.6}
+.sp{animation:spn 1.5s linear infinite}
+@keyframes spn{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.as{text-align:center;margin-bottom:20px}
+#ac{display:inline-block;width:80px;height:80px;border-radius:50%;border:3px solid #0a0a0a;overflow:hidden;background:transparent;position:relative;transition:border-color .3s;flex-shrink:0}
+#ac img{width:100%;height:100%;object-fit:cover;display:block}
+.ti{font-size:18px;font-weight:600;margin-bottom:20px;text-align:center;color:#0a0a0a;display:flex;align-items:center;justify-content:center;gap:8px}
+.ib{background:#f8f8f8;border-radius:10px;padding:18px 20px;margin-bottom:16px}
+.ib p{margin:6px 0;font-size:15px;color:#333;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.ib p .i{opacity:.6}
+.ib span{color:#0a0a0a;font-weight:600}
+.gt{color:#999!important;font-weight:400!important}
+.sb{background:#f8f8f8;border-radius:10px;padding:12px 20px;margin-bottom:16px;display:flex;justify-content:space-between}
+.sb .si{text-align:center;flex:1}
+.sb .si .nu{font-size:14px;font-weight:700;color:#0a0a0a}
+.sb .si .lb{font-size:14px;color:#0a0a0a;font-weight:600;margin-top:2px;display:flex;align-items:center;justify-content:center;gap:4px}
+.brc{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:16px}
+.brc .bt,.br .bt,.md .brw .bt{background:#0a0a0a;color:#fff;border:none;cursor:pointer;transition:background .3s;display:flex;align-items:center;justify-content:center}
+.brc .bt{padding:6px 0;border-radius:6px;font-size:12px;font-weight:600;gap:4px}
+.brc .bt:hover,.br .bt:hover,.md .brw .bc:hover{background:#222}
+.brc .bt:disabled{opacity:.6;cursor:not-allowed}
+.brc .bt .i,.brc .bt .is,.brc .bt .im,.br .bt .i,.br .bt .is,.br .bt .im,.md .brw .bc .i{filter:brightness(0)invert(1)}
+.sr,.gr{display:flex;align-items:center;justify-content:flex-start;margin:6px 0;font-size:15px;color:#333;gap:4px;flex-wrap:wrap}
+.sr .st2,.gr .gt2{color:#0a0a0a;font-weight:600}
+.sr .sb2,.gr .gb,.ib .qb{padding:1px 5px;background:#0a0a0a;color:#fff;border:none;border-radius:3px;cursor:pointer;font-size:11px;transition:background .2s;flex-shrink:0;height:20px;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.sr .sb2:hover,.gr .gb:hover,.ib .qb:hover{background:#222}
+.br{display:flex;gap:10px}
+.br .bt{flex:1;padding:14px;border-radius:10px;font-size:15px;font-weight:700;gap:8px}
+.br .bd2{background:#d9534f}
+.br .bd2:hover{background:#c9302c}
+.br .bd2 .i,.br .bd2 .is,.br .bd2 .im{filter:brightness(0)invert(1)}
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:999;justify-content:center;align-items:center}
+.mo.ac{display:flex}
+.md{background:#fff;border-radius:16px;padding:30px 24px;width:90%;max-width:340px;box-shadow:0 8px 40px rgba(0,0,0,0.2)}
+.md h3{font-size:18px;margin-bottom:16px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px}
+.md h3 .ib2{width:24px;height:24px;display:inline-block;vertical-align:middle;flex-shrink:0;filter:brightness(0)saturate(100%)}
+.md .ib3{margin-bottom:16px;position:relative}
+.md .ib3 input,.md .ib3 textarea{width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:15px;outline:none;font-family:inherit;background:#fff}
+.md .ib3 input:focus,.md .ib3 textarea:focus{border-color:#0a0a0a}
+.md .ib3 .cc{position:absolute;bottom:8px;right:10px;font-size:11px;color:#aaa;pointer-events:none}
+.md .brw{display:flex;gap:10px;margin-top:16px}
+.md .brw .bt{flex:1;padding:12px;border-radius:8px;font-size:15px;font-weight:600}
+.md .brw .bc{background:#0a0a0a;color:#fff}
+.md .brw .bv{background:#f0f0f0;color:#333}
+.md .brw .bv:hover{background:#e0e0e0}
+.fs2{background:#f8f8f8;border:1px solid #e5e5e5;border-radius:8px;margin:8px 0 12px;overflow:hidden}
+.fh2{padding:10px 14px;background:#f8f8f8;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;font-size:14px;font-weight:600;color:#333}
+.fh2 .i{margin-right:6px}
+.fb2{padding:12px 14px;border-top:1px solid #e5e5e5;background:#fff;display:none}
+.fb2.op{display:block}
+.gsi{transition:transform 0.3s ease;transform:rotate(0deg)}
+.gsi.op{transform:rotate(90deg)}
+.go{display:flex;flex-direction:column;gap:6px}
+.go .go2{display:block;width:100%;padding:6px 20px;border:1px solid #ddd;border-radius:8px;cursor:pointer;font-size:15px;transition:all .2s;background:#f8f8f8;color:#333;text-align:center;user-select:none}
+.go .go2:hover{background:#e5e5e5}
+.go .go2.sel{background:#fff;color:#000;border-color:#000}
+.rm .rl{max-height:400px;overflow-y:auto}
+.rm .ri{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f1f3f5}
+.rm .ri:last-child{border-bottom:none}
+.rm .ri .rn{font-weight:700;color:#0a0a0a;min-width:28px;font-size:13px}
+.rm .ri .ra{width:28px;height:28px;border-radius:50%;flex-shrink:0;overflow:hidden;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.rm .ri .ra img{width:100%;height:100%;object-fit:cover;display:block}
+.rm .ri .rad{background:transparent}
+.rm .ri .ri2{flex:1;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.rm .ri .ri2 .rn2{font-weight:600;color:#0a0a0a;font-size:13px;flex-shrink:0}
+.rm .ri .ri2 .rs{display:flex;align-items:center;gap:12px;font-weight:700;color:#0a0a0a;font-size:12px;flex-shrink:0}
+.rm .ri .ri2 .rs span{display:flex;align-items:center;gap:4px}
+.rm .ri .ri2 .rs .i{width:12px;height:12px;filter:brightness(0)saturate(100%)}
+.rm .cb3{margin-top:16px;width:100%;padding:12px;background:#0a0a0a;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer}
+.rm .cb3 .i{filter:brightness(0)invert(1)}
+.rm .cb3:hover{background:#222}
+.rm .ls2,.am2 .ls2{text-align:center;padding:30px 0;color:#aaa;display:flex;flex-direction:column;align-items:center;gap:8px}
+.rm .ls2 .i,.am2 .ls2 .i{width:28px;height:28px;filter:grayscale(1) opacity(0.6)}
+.am2 .acn{max-height:400px;overflow-y:auto;padding:8px 0}
+.am2 .acn .at2{font-size:16px;font-weight:600;margin-bottom:8px}
+.am2 .acn .ab2{font-size:14px;color:#333;white-space:pre-wrap;word-break:break-word}
+.am2 .cb3{margin-top:16px;width:100%;padding:12px;background:#0a0a0a;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer}
+.am2 .cb3 .i{filter:brightness(0)invert(1)}
+.am2 .cb3:hover{background:#222}
+input[type="checkbox"]{accent-color:#000}
+.hi{display:none}
+.mw{max-width:400px}
+#si{padding-right:50px}
+.no-data{text-align:center;padding:20px;color:#aaa}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<div class="c">
+  <div class="as"><div id="ac" class="da"><img src="/svg/avatar.svg"></div></div>
+  <div class="ti"><img src="/svg/user.svg" class="i"> 账号设置</div>
+
+  <div class="sb" id="statsBox">
+    <div class="si"><div class="nu" id="rankDisplay">--</div><div class="lb"><img src="/svg/ranking.svg" class="is">排名</div></div>
+    <div class="si"><div class="nu" id="pointsDisplay">0</div><div class="lb"><img src="/svg/coins.svg" class="is">积分</div></div>
+  </div>
+
+  <div class="ib">
+    <p><img src="/svg/user.svg" class="i">账号:<span id="profileUsername">––</span></p>
+    <p class="sr"><span><img src="/svg/sign.svg" class="i"> 签名:<span class="st2" id="profileSignature">––</span></span><button class="sb2" id="editSignatureBtn">修改</button></p>
+    <p class="gr"><span><img src="/svg/gender.svg" class="i"> 性别:<span class="gt2" id="profileGender">––</span></span><button class="gb" id="editGenderBtn">修改</button></p>
+    <p><img src="/svg/email.svg" class="i">邮箱:<span id="profileEmail">––</span></p>
+    <p><img src="/svg/time.svg" class="i">注册时间:<span id="profileCreatedAt">––</span></p>
+    <p><img src="/svg/qq.svg" class="ig">绑定QQ:<span id="qqStatus">––</span><button class="qb" id="qqBindBtn">修改</button></p>
+  </div>
+
+  <div class="brc">
+    <button class="bt" id="checkinBtn"><img src="/svg/calendar.svg" class="is">签到</button>
+    <button class="bt" id="transferBtn"><img src="/svg/transfer.svg" class="is">转账</button>
+    <button class="bt" id="rankingBtn"><img src="/svg/ranking.svg" class="is">排行榜</button>
+    <button class="bt" id="announceBtn"><img src="/svg/net.svg" class="is">公告</button>
+  </div>
+
+  <div class="br">
+    <button class="bt" id="backBtn"><img src="/svg/return.svg" class="i"> 返回</button>
+    <button class="bt bd2" id="logoutBtn"><img src="/svg/exit.svg" class="i"> 退出登录</button>
+  </div>
+</div>
+
+<div class="mo" id="qqModal"><div class="md"><h3><img src="/svg/qq.svg" class="i"> 绑定QQ</h3><div class="ib3"><input type="text" id="qqInput" placeholder="请输入QQ号" maxlength="11"></div><div class="brw"><button class="bt bv" id="qqModalCancel">取消</button><button class="bt bc" id="qqModalConfirm">确认绑定</button></div></div></div>
+
+<div class="mo" id="signatureModal"><div class="md"><h3><img src="/svg/sign.svg" class="i"> 修改签名</h3><div class="ib3"><textarea id="signatureInput" placeholder="请输入签名（1-20个字）" maxlength="20" rows="2"></textarea><div class="cc"><span id="charCount">0</span>/20</div></div><div class="brw"><button class="bt bv" id="signatureModalCancel">取消</button><button class="bt bc" id="signatureModalConfirm">确认修改</button></div></div></div>
+
+<div class="mo" id="genderModal"><div class="md"><h3><img src="/svg/gender.svg" class="i"> 修改性别</h3><div class="fs2"><div class="fh2" id="genderFoldHeader"><span><img src="/svg/gender.svg" class="i"> 选择性别</span><span id="genderFoldArrow"><img src="/svg/switch.svg" class="i gsi"></span></div><div class="fb2" id="genderFoldBody"><div class="go" id="genderOptions"><div class="go2" data-value="男">男</div><div class="go2" data-value="女">女</div><div class="go2" data-value="其他">其他</div><div class="go2" data-value="不愿透露">不愿透露</div></div></div></div><div class="brw"><button class="bt bv" id="genderModalCancel">取消</button><button class="bt bc" id="genderModalConfirm">确认修改</button></div></div></div>
+
+<div class="mo rm" id="rankingModal"><div class="md mw"><h3><img src="/svg/ranking.svg" class="i"> 排行榜</h3><div class="rl" id="rankingList"></div><button class="cb3" id="rankingCloseBtn"><img src="/svg/return.svg" class="i"> 关闭</button></div></div>
+
+<div class="mo am2" id="announceModal"><div class="md mw"><h3><img src="/svg/net.svg" class="ib2"> 公告</h3><div class="acn" id="announceContent"></div><button class="cb3" id="announceCloseBtn"><img src="/svg/return.svg" class="i"> 关闭</button></div></div>
+
+<div class="mo" id="transferModal"><div class="md"><h3><img src="/svg/transfer.svg" class="i"> 转账</h3><div class="ib3"><input type="text" id="transferTarget" placeholder="目标用户名"></div><div class="ib3"><input type="number" id="transferPoints" placeholder="积分" min="1" step="1"></div><div class="brw"><button class="bt bv" id="transferCancel">取消</button><button class="bt bc" id="transferConfirm">确定</button></div></div></div>
+
+<template id="tpl-loading">
+  <div class="ls2"><img src="/svg/loading.svg" class="i sp">加载中...</div>
+</template>
+
+<template id="tpl-no-data">
+  <div class="no-data">暂无数据</div>
+</template>
+
+<template id="tpl-no-announcement">
+  <div class="no-data">暂无公告</div>
+</template>
+
+<template id="tpl-load-failed">
+  <div class="no-data">加载失败</div>
+</template>
+
+<template id="tpl-announcement">
+  <div>
+    <div class="at2" data-field="title"></div>
+    <div class="ab2" data-field="content"></div>
+  </div>
+</template>
+
+<template id="tpl-ranking-item">
+  <div class="ri">
+    <span class="rn" data-field="rank"></span>
+    <div class="ra" data-field="avatar" data-username="">
+      <img data-field="avatar-img" src="">
+    </div>
+    <div class="ri2">
+      <span class="rn2" data-field="username"></span>
+      <span class="rs">
+        <span><img src="/svg/calendar.svg" class="is"> <span data-field="days"></span></span>
+        <span><img src="/svg/coins.svg" class="is"> <span data-field="points"></span></span>
+      </span>
+    </div>
+  </div>
+</template>
+
+<script src="/api/toast.js"></script>
+<script>
+"use strict";
+
+async function apiCall(url, method, body) {
+  try {
+    const opts = {
+      method: method || 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include'
+    };
+    if (body) opts.body = JSON.stringify(body);
+    const res = await fetch(url, opts);
+    return await res.json();
+  } catch (e) {
+    return { success: false, error: '网络连接失败' };
+  }
+}
+
+function cloneTemplate(id) {
+  const tpl = document.getElementById(id);
+  return tpl.content.cloneNode(true);
+}
+
+function fillText(el, selector, text) {
+  const target = el.querySelector(selector);
+  if (target) target.textContent = text;
+}
+
+function setAttr(el, selector, attr, value) {
+  const target = el.querySelector(selector);
+  if (target) target.setAttribute(attr, value);
+}
+
+const $ = (id) => document.getElementById(id);
+
+const ue = $('profileUsername');
+const ee = $('profileEmail');
+const se = $('profileSignature');
+const ge = $('profileGender');
+const ce = $('profileCreatedAt');
+const ac = $('ac');
+const qs = $('qqStatus');
+const rd = $('rankDisplay');
+const pd = $('pointsDisplay');
+const qb = $('qqBindBtn');
+const lo = $('logoutBtn');
+const bb = $('backBtn');
+const esb = $('editSignatureBtn');
+const egb = $('editGenderBtn');
+const cb = $('checkinBtn');
+const rb = $('rankingBtn');
+const ab = $('announceBtn');
+const tb = $('transferBtn');
+const qm = $('qqModal');
+const qi = $('qqInput');
+const qmc = $('qqModalConfirm');
+const qmc2 = $('qqModalCancel');
+const sm = $('signatureModal');
+const si = $('signatureInput');
+const cc = $('charCount');
+const smc = $('signatureModalConfirm');
+const smc2 = $('signatureModalCancel');
+const gm = $('genderModal');
+const go = $('genderOptions');
+const gmc = $('genderModalConfirm');
+const gmc2 = $('genderModalCancel');
+const gfh = $('genderFoldHeader');
+const gfb = $('genderFoldBody');
+const gfa = $('genderFoldArrow');
+const rm = $('rankingModal');
+const rl = $('rankingList');
+const rcb = $('rankingCloseBtn');
+const am2 = $('announceModal');
+const acn = $('announceContent');
+const acb = $('announceCloseBtn');
+const tm = $('transferModal');
+const tt = $('transferTarget');
+const tp = $('transferPoints');
+const tc = $('transferCancel');
+const tc2 = $('transferConfirm');
+
+let cq = '';
+let cs = '';
+let cg = '';
+let sg = '';
+let fo = false;
+
+function getGenderColor(g) {
+  if (g === '男') return '#1677ff';
+  if (g === '女') return '#ff69b4';
+  if (g === '其他') return '#ffc107';
+  return '#888';
+}
+
+function updateAvatar(qq, gender) {
+  const color = getGenderColor(gender);
+  ac.style.borderColor = color;
+  ac.classList.remove('da', 'qa');
+  ac.style.backgroundImage = '';
+  ac.style.backgroundColor = '';
+  ac.innerHTML = '';
+  if (qq) {
+    ac.classList.add('qa');
+    ac.style.backgroundImage = 'url(https://q1.qlogo.cn/g?b=qq&nk=' + qq + '&s=640)';
+    ac.style.backgroundSize = 'cover';
+    ac.innerHTML = '<img src="/svg/avatar.svg" style="display:none;">';
+  } else {
+    ac.classList.add('da');
+    ac.innerHTML = '<img src="/svg/avatar.svg">';
+  }
+}
+
+function updateSignature(text) {
+  se.textContent = text;
+  if (text === '未填写') se.classList.add('gt');
+  else se.classList.remove('gt');
+}
+
+function updateGender(text) {
+  ge.textContent = text;
+  if (text === '不愿透露') ge.classList.add('gt');
+  else ge.classList.remove('gt');
+}
+
+function updateRank(rank, points) {
+  rd.textContent = (points > 0 && rank) ? '#' + rank : '未上榜';
+}
+
+async function loadProfile() {
+  const r = await apiCall('/api/user', 'GET');
+  if (r.success) {
+    ue.textContent = r.username;
+    ee.textContent = r.email;
+    cs = r.signature || '未填写';
+    updateSignature(cs);
+    cg = r.gender || '不愿透露';
+    updateGender(cg);
+    ce.textContent = r.created_at || '未知';
+    cq = r.qq_number || '';
+    pd.textContent = r.total_points || 0;
+    updateRank(r.rank, r.total_points);
+    if (cq) {
+      qs.textContent = cq;
+      qs.className = 'qq-status';
+    } else {
+      qs.textContent = '未绑定';
+      qs.className = 'qq-status unbind';
+    }
+    updateAvatar(cq, cg);
+    toast.success('账号数据已加载');
+  } else {
+    window.location.href = '/login';
+  }
+}
+
+function renderLoading(container) {
+  container.innerHTML = '';
+  const clone = cloneTemplate('tpl-loading');
+  container.appendChild(clone);
+}
+
+function renderNoData(container) {
+  container.innerHTML = '';
+  const clone = cloneTemplate('tpl-no-data');
+  container.appendChild(clone);
+}
+
+function renderNoAnnouncement(container) {
+  container.innerHTML = '';
+  const clone = cloneTemplate('tpl-no-announcement');
+  container.appendChild(clone);
+}
+
+function renderLoadFailed(container) {
+  container.innerHTML = '';
+  const clone = cloneTemplate('tpl-load-failed');
+  container.appendChild(clone);
+}
+
+function renderAnnouncement(container, title, content) {
+  container.innerHTML = '';
+  const clone = cloneTemplate('tpl-announcement');
+  fillText(clone, '[data-field="title"]', title || '公告');
+  fillText(clone, '[data-field="content"]', content || '');
+  container.appendChild(clone);
+}
+
+function renderRankingItem(item) {
+  const clone = cloneTemplate('tpl-ranking-item');
+  const rankEl = clone.querySelector('[data-field="rank"]');
+  if (rankEl) rankEl.textContent = '#' + item.rank;
+
+  const avatarEl = clone.querySelector('[data-field="avatar"]');
+  if (avatarEl) avatarEl.dataset.username = item.username;
+
+  const imgEl = clone.querySelector('[data-field="avatar-img"]');
+  if (imgEl) {
+    imgEl.src = item.avatar_url || '/svg/avatar.svg';
+  }
+
+  fillText(clone, '[data-field="username"]', item.username);
+  fillText(clone, '[data-field="days"]', item.checkin_days);
+  fillText(clone, '[data-field="points"]', item.total_points);
+
+  return clone;
+}
+
+function renderRankingList(container, items) {
+  container.innerHTML = '';
+  if (!items || items.length === 0) {
+    const clone = cloneTemplate('tpl-no-data');
+    container.appendChild(clone);
+    return;
+  }
+  items.forEach(item => {
+    const el = renderRankingItem(item);
+    container.appendChild(el);
+  });
+  container.querySelectorAll('[data-field="avatar"]').forEach(el => {
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const username = this.dataset.username;
+      if (username) window.location.href = '/user?id=' + username;
+    });
+  });
+}
+
+si.addEventListener('input', function() {
+  cc.textContent = this.value.length;
+});
+esb.addEventListener('click', () => {
+  si.value = (cs === '未填写') ? '' : cs;
+  cc.textContent = si.value.length;
+  sm.classList.add('ac');
+});
+smc2.addEventListener('click', () => sm.classList.remove('ac'));
+smc.addEventListener('click', async () => {
+  let s = si.value.trim();
+  if (!s) s = '未填写';
+  const r = await apiCall('/api/update-signature', 'POST', { signature: s });
+  if (r.success) {
+    toast.success(r.message);
+    cs = r.signature;
+    updateSignature(cs);
+    sm.classList.remove('ac');
+  } else {
+    toast.error(r.error || '修改失败');
+  }
+});
+sm.addEventListener('click', (e) => {
+  if (e.target === sm) sm.classList.remove('ac');
+});
+
+gfh.addEventListener('click', () => {
+  fo = !fo;
+  gfb.classList.toggle('op');
+  const icon = gfa.querySelector('.gsi');
+  if (icon) icon.classList.toggle('op');
+});
+go.addEventListener('click', (e) => {
+  const o = e.target.closest('.go2');
+  if (!o) return;
+  document.querySelectorAll('.go2').forEach(el => el.classList.remove('sel'));
+  o.classList.add('sel');
+  sg = o.dataset.value;
+});
+egb.addEventListener('click', () => {
+  fo = false;
+  gfb.classList.remove('op');
+  const icon = gfa.querySelector('.gsi');
+  if (icon) icon.classList.remove('op');
+  document.querySelectorAll('.go2').forEach(el => el.classList.remove('sel'));
+  let found = false;
+  document.querySelectorAll('.go2').forEach(el => {
+    if (el.dataset.value === cg) {
+      el.classList.add('sel');
+      sg = cg;
+      found = true;
+    }
+  });
+  if (!found) {
+    const def = document.querySelector('.go2[data-value="不愿透露"]');
+    if (def) { def.classList.add('sel'); sg = '不愿透露'; }
+  }
+  gm.classList.add('ac');
+});
+gmc2.addEventListener('click', () => gm.classList.remove('ac'));
+gmc.addEventListener('click', async () => {
+  const sel = document.querySelector('.go2.sel');
+  if (!sel) { toast.error('请先展开并选择性别'); return; }
+  const g = sel.dataset.value;
+  const r = await apiCall('/api/update-gender', 'POST', { gender: g });
+  if (r.success) {
+    toast.success(r.message);
+    cg = r.gender;
+    updateGender(cg);
+    updateAvatar(cq, cg);
+    gm.classList.remove('ac');
+  } else {
+    toast.error(r.error || '修改失败');
+  }
+});
+gm.addEventListener('click', (e) => {
+  if (e.target === gm) gm.classList.remove('ac');
+});
+
+qb.addEventListener('click', () => {
+  qi.value = cq;
+  qm.classList.add('ac');
+});
+qmc2.addEventListener('click', () => qm.classList.remove('ac'));
+qmc.addEventListener('click', async () => {
+  const q = qi.value.trim();
+  if (!q) { toast.error('请输入QQ号'); return; }
+  if (!/^\d{5,11}$/.test(q)) { toast.error('请输入正确的QQ号'); return; }
+  const r = await apiCall('/api/bind-qq', 'POST', { qq_number: q });
+  if (r.success) {
+    toast.success(r.message);
+    qm.classList.remove('ac');
+    loadProfile();
+  } else {
+    toast.error(r.error || '绑定失败');
+  }
+});
+qm.addEventListener('click', (e) => {
+  if (e.target === qm) qm.classList.remove('ac');
+});
+
+cb.addEventListener('click', async () => {
+  cb.disabled = true;
+  cb.innerHTML = '<img src="/svg/loading.svg" class="is sp"> 签到中...';
+  const r = await apiCall('/api/checkin', 'POST');
+  if (r.success) {
+    toast.success(r.message);
+    pd.textContent = r.total;
+    loadProfile();
+  } else {
+    toast.error(r.error || '签到失败');
+  }
+  cb.disabled = false;
+  cb.innerHTML = '<img src="/svg/calendar.svg" class="is">签到';
+});
+
+rb.addEventListener('click', async () => {
+  rm.classList.add('ac');
+  renderLoading(rl);
+  const r = await apiCall('/api/ranking', 'GET');
+  if (r.success && r.ranking) {
+    renderRankingList(rl, r.ranking);
+    toast.success('排行榜加载成功');
+  } else {
+    renderNoData(rl);
+  }
+});
+rcb.addEventListener('click', () => rm.classList.remove('ac'));
+rm.addEventListener('click', (e) => {
+  if (e.target === rm) rm.classList.remove('ac');
+});
+
+ab.addEventListener('click', async () => {
+  am2.classList.add('ac');
+  renderLoading(acn);
+  const r = await apiCall('/api/announcement', 'GET');
+  if (r.success) {
+    if (r.is_active) {
+      renderAnnouncement(acn, r.title, r.content);
+    } else {
+      renderNoAnnouncement(acn);
+    }
+    toast.success('公告获取成功');
+  } else {
+    renderLoadFailed(acn);
+  }
+});
+acb.addEventListener('click', () => am2.classList.remove('ac'));
+am2.addEventListener('click', (e) => {
+  if (e.target === am2) am2.classList.remove('ac');
+});
+
+tb.addEventListener('click', () => {
+  tt.value = '';
+  tp.value = '';
+  tm.classList.add('ac');
+});
+tc.addEventListener('click', () => tm.classList.remove('ac'));
+tc2.addEventListener('click', async () => {
+  const t = tt.value.trim();
+  const p = tp.value.trim();
+  if (!t) { toast.error('请输入目标用户名'); return; }
+  if (!p) { toast.error('请输入积分'); return; }
+  const n = parseInt(p, 10);
+  if (isNaN(n) || n <= 0) { toast.error('积分必须是正整数'); return; }
+  const r = await apiCall('/api/transfer', 'POST', { target: t, points: n });
+  if (r.success) {
+    toast.success(r.message);
+    tm.classList.remove('ac');
+    loadProfile();
+  } else {
+    toast.error(r.error || '转账失败');
+  }
+});
+tm.addEventListener('click', (e) => {
+  if (e.target === tm) tm.classList.remove('ac');
+});
+
+lo.addEventListener('click', async () => {
+  const r = await apiCall('/api/logout', 'POST');
+  if (r.success) {
+    toast.success(r.message);
+    setTimeout(() => { window.location.href = '/login'; }, 500);
+  } else {
+    toast.error('退出失败');
+  }
+});
+bb.addEventListener('click', () => {
+  window.location.href = '/';
+});
+
+loadProfile();
+</script>
+</body>
+</html>

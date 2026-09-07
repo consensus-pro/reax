@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reax - 登录</title>
+<style>
+*{margin: 0;padding: 0;box-sizing: border-box;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;}
+body{background:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;position:relative}
+.bg{position:fixed;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(0,0,0,0.03)1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.03)1px,transparent 1px);background-size:50px 50px;pointer-events:none;z-index:0}
+.c{width:100%;max-width:340px;margin:0 auto;position:relative;z-index:1;padding:20px 0}
+.i{width:16px;height:16px;display:inline-block;vertical-align:middle;flex-shrink:0;filter:brightness(0)saturate(100%)}
+.iw{filter:brightness(0)invert(1)}
+.il{width:48px;height:48px;display:block;margin:0 auto 6px;filter:brightness(0)saturate(100%)}
+.sp{animation:spn 1s linear infinite;display:inline-block}
+@keyframes spn{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.ls{text-align:center;margin-bottom:18px}
+.ls .lt{font-size:18px;font-weight:700;color:#0a0a0a;letter-spacing:.5px}
+.ts{display:flex;gap:0;margin-bottom:18px;background:#f0f0f0;border-radius:8px;padding:3px}
+.ts a{flex:1;padding:7px 0;text-align:center;background:transparent;color:#888;font-size:13px;font-weight:600;cursor:pointer;border-radius:6px;transition:all .3s ease;text-decoration:none}
+.ts a.ac{background:#0a0a0a;color:#fff}
+.ts a:hover{color:#0a0a0a}
+.ts a.ac:hover{color:#fff}
+.fg{margin-bottom:10px}
+.iwr{display:flex;align-items:center;background:#f5f5f7;border:1px solid #e5e5ea;border-radius:8px;transition:all .3s ease;padding:0 12px;height:42px}
+.iwr:focus-within{border-color:#0a0a0a;background:#f0f0f2}
+.iwr .i{margin-right:8px;opacity:.4}
+.iwr input{flex:1;padding:8px 0;background:transparent;border:none;color:#0a0a0a;font-size:14px;outline:none;min-width:0}
+.iwr input::placeholder{color:#999;font-size:13px}
+.bt{width:100%;height:36px;min-height:36px;line-height:36px;padding:0 10px;background:#0a0a0a;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:background .3s ease;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:6px}
+.bt:hover{background:#222}
+.bt:disabled{background:#555;color:#fff;cursor:not-allowed}
+.captcha-row{display:flex;gap:10px;width:100%;align-items:stretch}
+.input-wrapper{flex:1;display:flex;align-items:center;background:#f8f8f8;border:1px solid #e5e5e5;border-radius:10px;transition:border-color .3s,background .3s;min-width:0;height:42px;padding:0 12px}
+.input-wrapper:focus-within{border-color:#0a0a0a;background:#f5f5f5}
+.input-wrapper .i{margin-right:8px;opacity:.4}
+.input-wrapper input{flex:1;padding:0;background:transparent;border:none;color:#0a0a0a;font-size:14px;outline:none;min-width:0;letter-spacing:2px;font-weight:600;text-transform:uppercase}
+.input-wrapper input::placeholder{color:#999;text-transform:none;font-weight:400;letter-spacing:0;font-size:13px}
+.captcha-img-wrap{position:relative;width:90px;height:42px;border-radius:10px;overflow:hidden;flex-shrink:0;border:2px solid #e5e5e5;background:#f8f8f8;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s}
+.captcha-img-wrap:active{border-color:#0a0a0a}
+.captcha-img-wrap img{width:100%;height:100%;object-fit:contain;display:block;border-radius:8px}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="c">
+<div class="ls"><img src="/svg/icon.svg" class="il"><div class="lt">Reax网络</div></div>
+<div class="ts"><a class="ac" href="/login">登录</a><a href="/register">注册</a></div>
+<div class="fg"><div class="iwr"><img src="/svg/user.svg" class="i"><input type="text" id="loginUsername" placeholder="请输入账号"></div></div>
+<div class="fg"><div class="iwr"><img src="/svg/lock.svg" class="i"><input type="password" id="loginPassword" placeholder="请输入密码"></div></div>
+<div class="fg">
+    <div class="captcha-row">
+        <div class="input-wrapper">
+            <img src="/svg/img.svg" class="i">
+            <input type="text" id="loginCaptcha" placeholder="验证码" maxlength="5" autocomplete="off" oninput="if(this.value.length>=5) this.blur();">
+        </div>
+        <div class="captcha-img-wrap" onclick="refreshCaptcha()">
+            <img id="captchaImg" src="">
+        </div>
+    </div>
+</div>
+<button class="bt" id="loginBtn"><img src="/svg/enter.svg" class="i iw"> 登录</button>
+</div>
+<script src="/api/toast.js"></script>
+<script>
+let captchaToken = '';
+
+async function refreshCaptcha() {
+    try {
+        const resp = await fetch('/api/captcha');
+        const data = await resp.json();
+        if (data.code === 0) {
+            document.getElementById('captchaImg').src = data.data.image;
+            captchaToken = data.data.captcha_token;
+        }
+        // 静默失
+    } catch (e) {
+        // 静默失败
+    }
+}
+
+!function(){
+    const $=id=>document.getElementById(id);
+    const u=$('loginUsername'), p=$('loginPassword'), c=$('loginCaptcha'), btn=$('loginBtn');
+    const api=async(url,method,body)=>{
+        const opts={method:method||'GET',headers:{'Content-Type':'application/json'},credentials:'include'};
+        if(body) opts.body=JSON.stringify(body);
+        const r=await fetch(url,opts);
+        return await r.json();
+    };
+
+    btn.addEventListener('click',async ()=>{
+        const un=u.value.trim(), pw=p.value.trim(), ca=c.value.trim();
+        if(!ca){ toast.error('请输入验证码'); return; }
+        if(!captchaToken){ toast.error('验证码未加载，请点击刷新'); return; }
+        btn.disabled=true;
+        btn.innerHTML='<img src="/svg/loading.svg" class="i sp iw"> 登录中...';
+        const r=await api('/api/login','POST',{username:un,password:pw,captcha:ca,captcha_token:captchaToken});
+        if(r.success){
+            toast.success(r.message);
+            setTimeout(()=>{ window.location.href='/'; },600);
+        }else{
+            toast.error(r.error||'登录失败');
+            btn.disabled=false;
+            btn.innerHTML='<img src="/svg/enter.svg" class="i iw"> 登录';
+            refreshCaptcha();
+        }
+    });
+
+    p.addEventListener('keydown',e=>{ if(e.key==='Enter') btn.click(); });
+    refreshCaptcha();
+}();
+</script>
+</body>
+</html>
